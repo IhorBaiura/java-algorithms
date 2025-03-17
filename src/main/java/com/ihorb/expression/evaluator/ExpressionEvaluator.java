@@ -10,10 +10,14 @@ public class ExpressionEvaluator {
     String[] tokens = expression.split("");
 
     for (String token : tokens) {
-      if (token.matches("\\d+\\.?\\d*"))  vals.push(Double.parseDouble(token));
-      else if (token.matches("("))                                            ;
-      else if (isOperator(token))                              ops.push(token);
-      else if (token.matches(")") && !ops.isEmpty())  applyOperator(ops, vals);
+      if (token.matches("\\d+\\.?\\d*"))  
+        vals.push(Double.parseDouble(token));
+      else if (token.matches("\\("))                                           
+        ;
+      else if (isOperator(token))                              
+        ops.push(token);
+      else if (token.matches("\\)") && !ops.isEmpty())  
+        applyOperator(ops, vals);
     }
 
     while (!ops.isEmpty()) {
@@ -26,7 +30,7 @@ public class ExpressionEvaluator {
   private void applyOperator(Stack<String> operators, Stack<Double> values) {
     String operator = operators.pop();
     Double value = values.pop();
-    Double result = 0;
+    Double result = 0.0;
 
     switch (operator) {
       case "+":
