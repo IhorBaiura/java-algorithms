@@ -3,7 +3,7 @@ package com.ihorb.datastructures.stack;
 public class FixedCapacityStack<Item> {
   private Item[] stack;
   private int size = 0;
-  private int capacity = 100;
+  private int capacity = 0;
 
   @SuppressWarnings("unchecked")
   public FixedCapacityStack(int capacity) {
