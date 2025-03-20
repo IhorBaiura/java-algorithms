@@ -12,7 +12,7 @@ public class FixedCapacityStack<Item> {
   }
 
   public void push(Item item) {
-    if (size == capacity) {
+    if (isFull()) {
       throw new RuntimeException("Stack is full");
     }
 
@@ -20,11 +20,15 @@ public class FixedCapacityStack<Item> {
   }
 
   public Item pop() {
-    if (size == 0) {
+    if (isEmpty()) {
       throw new RuntimeException("Stack is empty");
     }
 
     return stack[--size];
+  }
+
+  public boolean isFull() {
+    return size == capacity;
   }
 
   public boolean isEmpty() {

@@ -11,7 +11,7 @@ public class FixedCapacityStackOfStrings {
   }
 
   public void push(String s) {
-    if (N == C) {
+    if (isFull()) {
       throw new RuntimeException("Stack is full");
     }
     a[N++] = s;
@@ -22,6 +22,10 @@ public class FixedCapacityStackOfStrings {
       throw new RuntimeException("Stack is empty");
     }
     return a[--N];
+  }
+
+  public boolean isFull() {
+    return N == C;
   }
 
   public boolean isEmpty() {
