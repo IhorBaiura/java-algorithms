@@ -1,13 +1,12 @@
 package com.ihorb.datastructures.stack;
 
 public class DynamicCapacityStack<Item> {
-  private static final int SIZE = 15;
   private Item[] stack;
   private int N = 0;
 
   @SuppressWarnings("unchecked")
   public DynamicCapacityStack() {
-    stack = (Item[]) new Object[SIZE];
+    stack = (Item[]) new Object[1];
   }
 
   public void push(Item item) {
@@ -21,7 +20,14 @@ public class DynamicCapacityStack<Item> {
       throw new RuntimeException("Stack is empty");
     }
 
-    return stack[--N];
+    Item item = stack[--N];
+    stack[N] = null;
+
+    if (N > 0 && N == stack.length / 4) {
+      resize(stack.length / 2);
+    }
+
+    return item;
   }
 
   private boolean isFull() {
