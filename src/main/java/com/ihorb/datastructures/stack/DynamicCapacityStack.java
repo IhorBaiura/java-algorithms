@@ -1,6 +1,9 @@
 package com.ihorb.datastructures.stack;
 
-public class DynamicCapacityStack<Item> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class DynamicCapacityStack<Item> implements Iterable<Item> {
   private Item[] stack;
   private int N = 0;
 
@@ -47,5 +50,34 @@ public class DynamicCapacityStack<Item> {
     }
 
     stack = newStack;
+  }
+
+  @Override
+  public Iterator<Item> iterator() {
+    return new RallbackStackIterator();
+  }
+
+  private class RallbackStackIterator implements Iterator<Item> {
+    private int i = N;
+
+    @Override
+    public boolean hasNext() {
+      return i > 0;
+    }
+
+    @Override
+    public Item next() {
+      if (i == 0) {
+        throw new NoSuchElementException("Stack is empty");
+      }
+
+      return stack[--i];
+    }
+
+    @Override
+    public void remove() {
+      throw new UnsupportedOperationException("Unimplemented method 'remove'");
+    }
+
   }
 }
