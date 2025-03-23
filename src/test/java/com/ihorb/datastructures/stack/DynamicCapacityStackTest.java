@@ -79,4 +79,22 @@ public class DynamicCapacityStackTest {
     assertThrows(NoSuchElementException.class, () -> iterator.next(),
         "Iterator should throw NoSuchElementException when no more elements are available");
   }
+
+  @Test
+  @DisplayName("Test: For-each loop iterates in LIFO order")
+  void testForEachIterator() {
+    DynamicCapacityStack<String> stack = new DynamicCapacityStack<>();
+
+    stack.push("one");
+    stack.push("two");
+    stack.push("three");
+
+    StringBuilder result = new StringBuilder();
+    for (String item : stack) {
+      result.append(item).append(' ');
+    }
+
+    String iteratedOrder = result.toString().trim();
+    assertEquals("three two one", iteratedOrder, "For-each loop should iterate over the elements in LIFO order");
+  }
 }
