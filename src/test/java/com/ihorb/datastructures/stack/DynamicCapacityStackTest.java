@@ -1,6 +1,10 @@
 package com.ihorb.datastructures.stack;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -46,5 +50,33 @@ public class DynamicCapacityStackTest {
     }
 
     assertThrows(RuntimeException.class, () -> stack.pop(), "Popping an empty stack should throw an exception");
+  }
+
+  @Test
+  @DisplayName("Test: Iterator returns elements in LIFO order")
+  void testIterator() {
+    DynamicCapacityStack<String> stack = new DynamicCapacityStack<>();
+    stack.push("first");
+    stack.push("second");
+    stack.push("third");
+
+    Iterator<String> iterator = stack.iterator();
+    assertTrue(iterator.hasNext(), "Iterator should have a next element");
+    assertEquals("third", iterator.next(), "First iterator element should be 'third'");
+    assertEquals("second", iterator.next(), "Second iterator element should be 'second'");
+    assertEquals("first", iterator.next(), "Third iterator element should be 'first'");
+    assertFalse(iterator.hasNext(), "Iterator should have no more elements");
+  }
+
+  @Test
+  @DisplayName("Test: Iterator throws NoSuchElementException when exhausted")
+  void testIteratorThrowsException() {
+    DynamicCapacityStack<String> stack = new DynamicCapacityStack<>();
+    stack.push("only");
+    Iterator<String> iterator = stack.iterator();
+    assertEquals("only", iterator.next(), "Iterator should return the only element");
+
+    assertThrows(NoSuchElementException.class, () -> iterator.next(),
+        "Iterator should throw NoSuchElementException when no more elements are available");
   }
 }
