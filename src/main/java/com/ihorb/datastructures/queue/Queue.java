@@ -1,11 +1,12 @@
 package com.ihorb.datastructures.queue;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Queue<Item> implements Iterable<Item> {
-  Node first = null;
-  Node last = null;
-  int count = 0;
+  private Node first = null;
+  private Node last = null;
+  private int count = 0;
 
   public void enqueue(Item value) {
     Node oldLast = last;
@@ -20,6 +21,8 @@ public class Queue<Item> implements Iterable<Item> {
   }
 
   public Item dequeue() {
+    if (first == null)
+      throw new RuntimeException("Stack is empty");
     Item value = first.value;
     first = first.next;
     count--;
@@ -41,6 +44,7 @@ public class Queue<Item> implements Iterable<Item> {
     Node next;
   }
 
+  @Override
   public Iterator<Item> iterator() {
     return new QueueIterator();
   }
@@ -50,14 +54,22 @@ public class Queue<Item> implements Iterable<Item> {
 
     @Override
     public boolean hasNext() {
-      return current.next != null;
+      return current != null;
     }
 
     @Override
     public Item next() {
+      if (current == null) {
+        throw new NoSuchElementException("Stack is empty");
+      }
       Item value = current.value;
       current = current.next;
       return value;
+    }
+
+    @Override
+    public void remove() {
+      throw new UnsupportedOperationException("Unimplemented method 'remove'");
     }
   }
 }
