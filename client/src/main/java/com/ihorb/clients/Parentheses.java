@@ -21,11 +21,9 @@ public class Parentheses {
 
       char current = stack.pop();
 
-      if (c == ')' && current == '('
-          || c == ']' && current == '['
-          || c == '}' && current == '{') {
-        continue;
-      } else {
+      if (!(c == ')' && current == '(') &&
+          !(c == ']' && current == '[') &&
+          !(c == '}' && current == '{')) {
         stack.push(current);
         stack.push(c);
       }
