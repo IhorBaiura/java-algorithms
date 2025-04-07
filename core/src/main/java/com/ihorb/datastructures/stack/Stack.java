@@ -38,6 +38,10 @@ public class Stack<Item> implements Iterable<Item> {
     return counter;
   }
 
+  public Item peek() {
+    return linkedList.value;
+  }
+
   private class Node {
     Item value;
     Node next;

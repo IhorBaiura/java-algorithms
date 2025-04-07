@@ -39,6 +39,19 @@ public class StackTest {
   }
 
   @Test
+  @DisplayName("Test: Peek item with saving structure")
+  void testPeek() {
+    Stack<String> stack = new Stack<>();
+
+    stack.push("first");
+
+    assertFalse(stack.isEmpty(), "Stack should be not empty after pushing an item");
+    assertEquals("first", stack.peek(),
+        "Should return the most recently inserted item on the stack (without popping it).");
+    assertEquals(1, stack.size(), "Stack size should be 1 after peek method");
+  }
+
+  @Test
   @DisplayName("Test: Popping from an empty stack throws exception")
   void testPopOnEmptyStackThrowsException() {
     Stack<Integer> stack = new Stack<>();
