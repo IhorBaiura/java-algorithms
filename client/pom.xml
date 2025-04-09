@@ -34,6 +34,7 @@
         <version>3.1.0</version>
         <configuration>
           <mainClass>com.ihorb.clients.Parentheses</mainClass>
+          <mainClass>com.ihorb.clients.ParenthesesWithoutLeft</mainClass>
         </configuration>
       </plugin>
     </plugins>

@@ -8,3 +8,6 @@ test-unit-coverage:
 
 run-parenthese-client:
 	mvn exec:java -Dexec.mainClass="com.ihorb.clients.Parentheses" -pl client
+
+run-parenthese-without-left-client:
+	mvn exec:java -Dexec.mainClass="com.ihorb.clients.ParenthesesWithoutLeft" -pl client
